@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './cardio'),
     publicPath: '/cardio/',
-    filename: 'main.js'
+    filename: 'build.js'
   },
   module: {
     rules: [
@@ -34,7 +34,9 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: 'images/[name].[ext]'
+          name: function(file){
+            return 'images/[name].[ext]';
+          }
         }
       }
     ]

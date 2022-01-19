@@ -4,16 +4,14 @@
     <img width="100%" src="./images/banner_prime.png">
 
     <h1>{{ msg }}</h1>
-    <input-lvl v-if="flagStart === 0 && count === 0" 
-    v-bind:warmUpTimeSel="warmUpTime"
-    v-bind:warmUpRestSel="warmUpRest"
-    v-bind:warmUpRoundSel="warmUpRound"
-    v-bind:hiitTimeSel="hiitTime"
-    v-bind:hiitRestSel="hiitRest"
-    v-bind:hiitRoundSel="hiitRound"
+    <input-lvl v-if="flagStart === 0 && count === 0"
+    v-bind:hiitSel="hiit"
+    v-on:changeTime="handleChangeTime"
+    v-on:changeRest="handleChangeRest"
+    v-on:changeRound="handleChangeRound"
+    v-on:start="activeStart"
     />
 
-    <p>{{warmUpTime}}</p>
   </div>
 </template>
 
@@ -24,24 +22,56 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Test test test',
+      msg: 'Cardio with Njk',
       //warm up
-      warmUpTime: 0,
-      warmUpRest: 0,
-      warmUpRound: 0,
+      warmUp: [30,30,2],
       //HIIT
-      hiitTime: 0,
-      hiitRest: 0,
-      hiitRound: 0,
+      hiit: {
+        time: 0,
+        rest: 0,
+        round: 2
+      },
 
       flagStart: 0,
       count: 0
     }
   },
 
+  methods: {
+    handleChangeTime(number) {
+      if ((this.hiit.time+number) >= 0){
+        this.hiit.time += number;
+        // console.log(this.hiit.time);
+      }
+      else{
+        this.hiit.time = 0;
+      }
+    },
+    handleChangeRest(number) {
+      if ((this.hiit.rest+number) >= 0){
+        this.hiit.rest += number;
+      }
+      else {
+        this.hiit.rest = 0;
+      }
+    },
+    handleChangeRound(number) {
+      if ((this.hiit.round+number) >= 0){
+        this.hiit.round += number;
+      }
+      else {
+        this.hiit.round = 0;
+      }
+    },
+    activeStart(){
+      this.flagStart = 1;
+    }
+  },
+
   components: { 
     inputLvl
   }
+  
 }
 </script>
 
