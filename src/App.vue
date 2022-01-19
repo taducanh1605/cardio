@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     
-    <img width="100%" src="./images/banner_prime.png">
+    <img width="100%" src="cardio/images/banner_prime.png">
 
     <h1>{{ msg }}</h1>
     <input-lvl v-if="flagStart === 0 && count === 0"
