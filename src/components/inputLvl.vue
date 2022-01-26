@@ -14,7 +14,7 @@
       </div>
 
       <!-- <br/> -->
-      <p class="totalTime" >Total time for cardio: {{dureeStr}}</p>
+      <p class="totalTime" >Estimated time for Cardio: {{dureeStr}}</p>
       
       <!-- <br/> -->
 
@@ -45,7 +45,7 @@
         </div>
 
         <div class="cardioContent">
-          <p>Break-Time (Seconds)</p>
+          <p>Break Time (Seconds)</p>
           <input type="number" v-model.number="hiit.rest">
         </div>
 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="cardioContent">
-          <p>Rounds:</p>
+          <p>Cardio Rounds:</p>
           <input type="number" v-model.number="hiit.round">
         </div>
 
