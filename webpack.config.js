@@ -35,7 +35,7 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name: function(file){
-            return 'images/[name].[ext]';
+            return '[name].[ext]';
           }
         }
       }

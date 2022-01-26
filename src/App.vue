@@ -1,75 +1,53 @@
 <template>
   <div id="app">
     
-    <img width="100%" src="cardio/images/banner_prime.png">
+    <img width="60%" src="cardio/banner_prime.png" class="img-responsive button-img">
 
-    <h1>{{ msg }}</h1>
-    <input-lvl v-if="flagStart === 0 && count === 0"
-    v-bind:hiitSel="hiit"
-    v-on:changeTime="handleChangeTime"
-    v-on:changeRest="handleChangeRest"
-    v-on:changeRound="handleChangeRound"
+    <!-- <h1>{{ msg }}</h1> -->
+
+    <input-lvl 
+    v-if="flagStart === 0"
     v-on:start="activeStart"
     />
+
+    <timer-cardio
+    v-if="flagStart === 1"
+    v-bind:warmupFlag="warmup"
+    v-bind:hiit="hiit"
+    v-bind:flagStartProp="flagStart"/>
 
   </div>
 </template>
 
 <script>
 import inputLvl from './components/inputLvl.vue';
+import timerCardio from './components/timerCardio.vue';
 
 export default {
   name: 'app',
   data () {
     return {
       msg: 'Cardio with Njk',
-      //warm up
-      warmUp: [30,30,2],
       //HIIT
-      hiit: {
-        time: 0,
-        rest: 0,
-        round: 2
-      },
+      hiit: {},
+      warmup: true,
 
-      flagStart: 0,
-      count: 0
+      //flag
+      flagStart: 0
     }
   },
 
   methods: {
-    handleChangeTime(number) {
-      if ((this.hiit.time+number) >= 0){
-        this.hiit.time += number;
-        // console.log(this.hiit.time);
-      }
-      else{
-        this.hiit.time = 0;
-      }
-    },
-    handleChangeRest(number) {
-      if ((this.hiit.rest+number) >= 0){
-        this.hiit.rest += number;
-      }
-      else {
-        this.hiit.rest = 0;
-      }
-    },
-    handleChangeRound(number) {
-      if ((this.hiit.round+number) >= 0){
-        this.hiit.round += number;
-      }
-      else {
-        this.hiit.round = 0;
-      }
-    },
-    activeStart(){
-      this.flagStart = 1;
+    activeStart(data){
+      this.flagStart = data.flag;
+      this.warmup = data.warmup;
+      this.hiit = data.hiit;
     }
   },
 
   components: { 
-    inputLvl
+    inputLvl,
+    timerCardio
   }
   
 }
