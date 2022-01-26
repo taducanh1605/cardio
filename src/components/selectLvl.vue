@@ -1,12 +1,8 @@
 <template>
-    <div>
-
-      <select v-model.number="select" v-on:change="selectHandle" class="selectLvl">
-          <option value="-1" selected>Choose a level</option>
-          <option v-for="lvl in 9" v-bind:value="lvl-1" :key="lvl-1"> Level. {{lvl-1}} </option>
-      </select>
-
-    </div>
+  <select v-model.number="select" v-on:change="selectHandle" class="selectLvl">
+    <option value="-1" selected>Choose a level</option>
+    <option v-for="lvl in 9" v-bind:value="lvl-1" :key="lvl-1"> Level. {{lvl-1}} </option>
+  </select>
 </template>
 
 <script>
@@ -75,7 +71,7 @@ export default {
     background: #454646;
     color: #fff;
     border-radius: 18px;
-    padding: 5px 0px 5px 5px;
+    padding: 0px 5px 0px 5px;
 }
 
 </style>

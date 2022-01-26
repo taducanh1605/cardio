@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     
-    <img width="60%" src="cardio/banner_prime.png" class="img-responsive">
+    <img width="60%" src="cardio/banner_prime.png" class="img-responsive" style="margin: 0 auto;">
 
     <!-- <h1>{{ msg }}</h1> -->
 

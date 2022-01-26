@@ -14,7 +14,7 @@
       </div>
 
       <!-- <br/> -->
-      <p>Total time for cardio: {{dureeStr}}</p>
+      <p class="totalTime" >Total time for cardio: {{dureeStr}}</p>
       
       <!-- <br/> -->
 
@@ -65,7 +65,7 @@
         </div>
 
         <div class="cardioContent">
-          <p>Round(s):</p>
+          <p>Rounds:</p>
           <input type="number" v-model.number="hiit.round">
         </div>
 
@@ -204,7 +204,29 @@ export default {
 
 .select-line {
   width: 40%;
-  margin: 20px auto;
+  margin: 10px auto;
+}
+
+.select-line div {
+  margin: 7px auto;
+}
+
+.totalTime {
+  width: 35%;
+  /* background: #454646; */
+  color: #fff;
+  border-radius: 18px;
+  border: 1px solid;
+  border-color: #585757;
+  margin: 10px auto;
+  font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1200 - 300)));
+  padding-block: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+  totalTime {
+    width: 50%;
+  }
 }
 
 .inputRow {
@@ -221,24 +243,25 @@ export default {
   align-items: center;   
 }
 .buttonSup {
-  width:37%;
+  width:35%;
 	float:left;
   text-align: right;
 	/* border:1px solid #ff0000; */
 	display:inline-block;
 }
 .cardioContent {
-  width:37%;
+  width:39%;
 	float:left;	
 	/* border:1px solid #ff0000; */
 	display:inline-block;
 }
 .cardioContent input{
-  width: 100%;
+  width: 45%;
   background: transparent;
   border:none;
   text-align: center;
   font-size: calc(40px + (60 - 40) * ((100vw - 300px) / (1200 - 300)));
+  font-family: "sportrop regular";
 }
 .cardioContent input:focus{
   outline:none;
@@ -247,8 +270,8 @@ export default {
   box-shadow: none;
 }
 .buttonPlus {
-  width:32%;
-	float:right;
+  width:29%;
+	float: right;
   text-align: left;
 	/* border:1px solid #ff0000; */
 	display:inline-block;	
@@ -273,11 +296,11 @@ export default {
 }
 #button-start img {
     height: auto;
-    width: calc(164px + (260 - 164) * ((100vw - 300px) / (1200 - 300)));
+    width: calc(190px + (260 - 190) * ((100vw - 300px) / (1200 - 300)));
 }
 .button-img{
     cursor: pointer;
-    margin: 0 auto;
+    margin: 20px auto;
     -webkit-transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
 }
@@ -297,7 +320,7 @@ export default {
 	/* color: #d6da0c; */
 	font-family: "sportrop regular";
     letter-spacing: 0.05em;
-    font-size: calc(70px + (100 - 70) * ((100vw - 300px) / (1200 - 300)));
+    font-size: calc(50px + (80 - 50) * ((100vw - 300px) / (1200 - 300)));
 	text-decoration: none;
 	white-space: nowrap;
     text-shadow: 0 0 20px rgb(230, 226, 10),  0 0 20px rgba(226, 230, 10, 0);
