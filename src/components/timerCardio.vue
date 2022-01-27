@@ -26,9 +26,9 @@
       <button v-if="flagStart === 3">Finish</button> -->
       <div id="frame_button">
         <div id="button-start" v-on:click="handleStartButton" v-on:space="handleStartButton">
-          <img v-if="flagStart === 1" src="cardio/Pause.png" class="img-responsive button-img">
-          <img v-if="flagStart === 2" src="cardio/Done.png" class="img-responsive button-img">
-          <img v-if="flagStart === 3" src="cardio/Finish.png" class="img-responsive button-img">
+          <img v-if="flagStart === 1" src="cardio/pause.png" class="img-responsive button-img">
+          <img v-if="flagStart === 2" src="cardio/done.png" class="img-responsive button-img">
+          <img v-if="flagStart === 3" src="cardio/finish.png" class="img-responsive button-img">
         </div>
       </div>
     
