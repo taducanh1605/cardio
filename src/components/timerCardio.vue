@@ -17,9 +17,9 @@
         </div>
       </div>
 
-      <p class="row3">{{row_content}}</p>
+      <p class="row3" v-bind:class="row3_switch" >{{row_content}}</p>
 
-      <p class="row4">{{row_timer}}</p>
+      <p class="row4" v-bind:class="row4_switch" v-if="flagStart < 3">{{row_timer}}</p>
 
       <!-- <button v-if="flagStart === 1" v-on:click="handleStartButton()">Pause</button>
       <button v-if="flagStart === 2" v-on:click="handleStartButton()">Continue</button>
@@ -43,6 +43,11 @@ function padding_zero(number) {
   else {
     return (""+number);
   }
+}
+
+function ring(nameRing){
+    var myRing = new Audio('cardio/'+nameRing+'.wav');
+    myRing.play();
 }
 
 export default {
@@ -91,8 +96,11 @@ export default {
       flagStart: 0,
       flagCardio: 0,
       flagRest: 0,
-      flagPause: 1
+      flagPause: 1,
 
+      row3_switch: "row3_ready",
+      row4_switch: "row4_ready"
+      
     }
   },
 
@@ -153,22 +161,42 @@ export default {
     },
 
     row_round: function() {
-      return ("ROUND: " + this.order + "/" + this.sumRound)
+      if (this.flagStart == 3) {
+        return "CONGRATULATION";
+      }
+      else if (this.doneWarmup >0) {
+        return ("ROUND: " + this.orderCardio + "/" + this.hiit.round);
+      }
+      else {
+        return ("WARM-UP ROUND: " + this.order + "/2");
+      }
     },
     
     row_content: function() {
       if (this.flagPause > 0){
+        this.row3_switch = "row3_ready";
+        this.row4_switch = "row4_ready";
         return "ARE YOU READY?";
       }
       else if (this.flagCardio > 0){
+        this.row4_switch = "row4_doit";
         if (this.doneWarmup > 0){
-          return "Let's Cardio";
+          this.row3_switch = "row3_cardio";
+          if (this.flagStart < 3){
+            return "Let's Cardio";
+          }
+          else {
+            return "You done great job!"
+          }
         }
         else {
-          return "Warm Up " + this.orderWarmup + "/2";
+          this.row3_switch = "row3_warmup";
+          return "Warm Up";
         }
       }
       else {
+        this.row3_switch = "row3_break";
+        this.row4_switch = "row4_break";
         return "Break Time";
       }
     },
@@ -190,7 +218,13 @@ export default {
 
       //update order
       if ((this.flagStart == 1) && (this.timer == 0) && (this.flagCardio > 0)) {
-        (this.order >= this.sumRound) ? this.flagStart = 3 : this.order++;
+        if (this.order >= this.sumRound) {
+          ring('finish');
+          this.flagStart = 3;
+        }
+        else {
+          this.order++;
+        }
       }
 
       if (this.flagStart == 1) {
@@ -203,6 +237,7 @@ export default {
             this.flagPause = 0; 
           }
           else if (this.flagCardio > 0) {
+            ring('breaktime');
 
             //update flag
             this.flagCardio = 0;
@@ -217,6 +252,8 @@ export default {
             }
           }
           else {
+            ring('ringGo');
+
             //update flag
             this.flagCardio = 1;
             this.flagRest = 0;
@@ -259,6 +296,7 @@ export default {
         this.timer = 0;
       }
       else if (this.flagStart === 2){
+        ring('start');
         this.flagStart = 1;
       }
     },
@@ -296,10 +334,10 @@ export default {
 .row1 {
     font-family: "Armalite Rifle";
     letter-spacing: 0.05em;
-    /*font-size: 2.7rem;*/
     font-size: calc(20px + (28 - 20) * ((100vw - 300px) / (1200 - 300)));
     color: #daf6ff;
     text-shadow: 0 0 20px rgba(10, 175, 230, 1),  0 0 20px rgba(10, 175, 230, 0);
+    margin: 15px auto;
 }
 
 /* 
@@ -340,8 +378,8 @@ export default {
     font-family: "Destroy";
     font-size: calc(20px + (28 - 20) * ((100vw - 300px) / (1200 - 300)));
     padding: 12px 0 0 0;
-    color: #ffab10;
-    text-shadow: 0 0 20px rgb(230, 10, 10),  0 0 20px rgba(230, 10, 10, 0);
+    color: #c9c9c9;
+    text-shadow: 0 0 20px rgb(141, 141, 141),  0 0 20px rgba(230, 10, 10, 0);
 }
 
 .button {
@@ -378,9 +416,23 @@ export default {
     letter-spacing: 0.05em;
     /*font-size: 3.5rem;*/
     font-size: calc(24px + (34 - 24) * ((100vw - 300px) / (1200 - 300)));
-    padding: 5px 0;
-    color: #10fff3;
-    text-shadow: 0 0 20px rgb(10, 230, 175),  0 0 20px rgba(10, 230, 201, 0);
+    padding: 10px 0;
+}
+.row3_ready {
+  color: #e7ff10;
+  text-shadow: 0 0 20px rgb(215, 230, 10),  0 0 20px rgba(10, 230, 201, 0);
+}
+.row3_cardio {
+  color: #10ff38;
+  text-shadow: 0 0 20px rgb(10, 230, 21),  0 0 20px rgba(10, 230, 201, 0);
+}
+.row3_warmup {
+  color: #10ff9b;
+  text-shadow: 0 0 20px rgb(10, 230, 164),  0 0 20px rgba(10, 230, 201, 0);
+}
+.row3_break {
+  color: #ff1010;
+  text-shadow: 0 0 20px rgb(230, 10, 47),  0 0 20px rgba(10, 230, 201, 0);
 }
 
 /* 
@@ -392,8 +444,19 @@ export default {
     letter-spacing: 0.05em;
     font-size: calc(22px + (32 - 22) * ((100vw - 300px) / (1200 - 300)));
     padding: 5px 0;
-    color: #ff1044;
-    text-shadow: 0 0 20px rgb(230, 10, 65),  0 0 20px rgba(230, 10, 65, 0);
+}
+
+.row4_ready {
+  color: #18ff10;
+  text-shadow: 0 0 20px rgb(10, 230, 58),  0 0 20px rgba(10, 230, 201, 0);
+}
+.row4_doit {
+  color: #ff1810;
+  text-shadow: 0 0 20px rgb(230, 61, 10),  0 0 20px rgba(10, 230, 201, 0);
+}
+.row4_break {
+  color: #109fff;
+  text-shadow: 0 0 20px rgb(10, 223, 230),  0 0 20px rgba(10, 230, 201, 0);
 }
 
 </style>
