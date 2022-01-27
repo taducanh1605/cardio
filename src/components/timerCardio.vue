@@ -157,7 +157,7 @@ export default {
     },
 
     row_clock: function() {
-      return ("Total Cardio time: " + this.clock);
+      return ("Cardio's total real-time: " + this.clock);
     },
 
     row_round: function() {

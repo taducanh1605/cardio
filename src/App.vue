@@ -37,17 +37,17 @@ export default {
     }
   },
 
+  components: { 
+    inputLvl,
+    timerCardio
+  },
+  
   methods: {
     activeStart(data){
       this.flagStart = data.flag;
       this.warmup = data.warmup;
       this.hiit = data.hiit;
     }
-  },
-
-  components: { 
-    inputLvl,
-    timerCardio
   }
   
 }
