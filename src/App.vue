@@ -100,12 +100,13 @@ document.addEventListener('visibilitychange', async () => {
 }
 
 @font-face{
-    font-family:sportrop regular;
+    font-family: 'sportrop regular';
     font-style:normal;
     font-weight:400;
     src:local('Sportrop Regular'),local('Sportrop-Regular'),
-        url(https://www.allfont.es/cache/fonts/sportrop_f0ad1188ea12551e526340362302355b.woff) format('woff'),
-        url(https://www.allfont.es/cache/fonts/sportrop_f0ad1188ea12551e526340362302355b.ttf) format('truetype');
+    url("./fonts/sportrop.regular.ttf") format("woff"),
+    url("./fonts/sportrop.regular.ttf") format("opentype"),
+    url("./fonts/sportrop.regular.ttf") format("truetype");
 }
 
 @font-face{

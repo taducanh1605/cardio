@@ -16,7 +16,7 @@
       Prevent Reload page when workout
       ----------------------------------------------------------------------*/
       window.onbeforeunload = function() {
-          if (startF.time != 0){
+          if (startF != 0){
               return "Do you want to reload page?";
           };
       };
