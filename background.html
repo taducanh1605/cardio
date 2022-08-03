@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-  <meta http-equiv="refresh" content="25" />
+    <meta http-equiv="refresh" content="25" />
 </head>
 
 <body>
-  <script>
-    async () => {
-      if ('wakeLock' in navigator) {
-        let screenLockBackground = await parent.navigator.wakeLock.request();
-      }
-    }
-  </script>
+    <script>
+        async () => {
+            if ('wakeLock' in navigator) {
+                let screenLockBackground = await parent.navigator.wakeLock.request();
+            }
+        }
+    </script>
 </body>
 
 </html>
