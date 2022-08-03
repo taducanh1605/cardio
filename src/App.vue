@@ -63,9 +63,9 @@ export default {
 
 <style>
 html,body {
-    /* width: 97.9%; */
+    max-width: 96%;
     margin: auto;
-    /* height: 100%; */
+    max-height: 98%;
     font-family: 'Share Tech Mono', monospace;
     text-align: center;
     color: #ffffff;

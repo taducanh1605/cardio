@@ -1,7 +1,7 @@
 <template>
     <div>
       <!-- <p>Set cardio-time and break-time and how many round you want to do.</p> -->
-      
+
 
       <div class="row select-line">
         <div class="col-sm-6">
@@ -15,7 +15,7 @@
 
       <!-- <br/> -->
       <p class="totalTime" >Estimated time for Cardio: {{dureeStr}}</p>
-      
+
       <!-- <br/> -->
 
       <div class="row inputRow">
@@ -82,7 +82,7 @@
           <img src="cardio/start.png" class="img-responsive button-img">
         </div>
       </div>
-    
+
     </div>
 </template>
 
@@ -103,7 +103,7 @@ export default {
   props: {
   },
 
-  components: { 
+  components: {
     selectLvl
   },
 
@@ -177,7 +177,7 @@ export default {
   methods: {
     start(e){
       var data = {
-        warmup: this.warmup, 
+        warmup: this.warmup,
         hiit: this.hiit,
         flag: 1
       }
@@ -204,7 +204,7 @@ export default {
 
 .select-line {
   width: 40%;
-  margin: 10px auto;
+  margin: 5px auto;
 }
 
 .select-line div {
@@ -232,15 +232,15 @@ export default {
 .inputRow {
   width:98%;
 	text-align:center;
-   
-   
-  display: -webkit-flex;    
+
+
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-    
-  -webkit-align-items: center;    
+
+  -webkit-align-items: center;
   -ms-flex-align: center;
-  align-items: center;   
+  align-items: center;
 }
 .buttonSup {
   width:35%;
@@ -251,7 +251,7 @@ export default {
 }
 .cardioContent {
   width:39%;
-	float:left;	
+	float:left;
 	/* border:1px solid #ff0000; */
 	display:inline-block;
 }
@@ -274,7 +274,7 @@ export default {
 	float: right;
   text-align: left;
 	/* border:1px solid #ff0000; */
-	display:inline-block;	
+	display:inline-block;
 }
 
 #frame_button{
@@ -282,14 +282,14 @@ export default {
     height: calc(60px + (100 - 60) * ((100vw - 300px) / (1200 - 300)));
     margin: 0px auto;
     vertical-align: middle;
-    
-    display: -webkit-flex;    
+
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-        
-    -webkit-align-items: center;    
+
+    -webkit-align-items: center;
     -ms-flex-align: center;
-    align-items: center;  
+    align-items: center;
 }
 #button-start{
     margin: auto;
