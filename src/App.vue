@@ -83,50 +83,6 @@ document.addEventListener('visibilitychange', async () => {
 </script>
 
 <style>
-@font-face {
-    font-family: 'Destroy';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Destroy'),
-        url('https://fonts.cdnfonts.com/s/111/DESTROY_.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'Old Stamper';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Old Stamper'),
-        url('https://fonts.cdnfonts.com/s/331/old_stamper.woff') format('woff');
-}
-
-@font-face{
-    font-family: 'sportrop regular';
-    font-style:normal;
-    font-weight:400;
-    src:local('Sportrop Regular'),local('Sportrop-Regular'),
-    url("./fonts/sportrop.regular.ttf") format("woff"),
-    url("./fonts/sportrop.regular.ttf") format("opentype"),
-    url("./fonts/sportrop.regular.ttf") format("truetype");
-}
-
-@font-face{
-    font-family:capture it;
-    font-style:normal;
-    font-weight:400;
-    src:local('Capture it'),local('Captureit-Regular'),
-        url(https://allfont.ru/cache/fonts/capture-it_36d8e4bafcd0d3bd809b9d12e819982e.woff) format('woff'),
-        url(https://allfont.ru/cache/fonts/capture-it_36d8e4bafcd0d3bd809b9d12e819982e.ttf) format('truetype');
-}
-
-@font-face {
-    font-family: 'Armalite Rifle';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Armalite Rifle'), local('ArmaliteRifle-Regular'),
-        url(https://allfont.ru/cache/fonts/armalite-rifle_8b8d0c2e30a8ddf3d87d1cff3852f649.woff) format('woff'),
-        url(https://allfont.ru/cache/fonts/armalite-rifle_8b8d0c2e30a8ddf3d87d1cff3852f649.ttf) format('truetype');
-}
-
 html,body {
     width: 97.9%;
     margin: auto;

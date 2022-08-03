@@ -1,45 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Cardio</title>
-    <iframe src="./background.html" style="display:none;"></iframe>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script>
-      var startF = 0;
-      /*----------------------------------------------------------------------
-      Prevent Reload page when workout
-      ----------------------------------------------------------------------*/
-      window.onbeforeunload = function() {
-          if (startF != 0){
-              return "Do you want to reload page?";
-          };
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Cardio</title>
+  <style>
+    @font-face {
+      font-family: 'Destroy';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Destroy'),
+        url('https://fonts.cdnfonts.com/s/111/DESTROY_.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'Old Stamper';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Old Stamper'),
+        url('https://fonts.cdnfonts.com/s/331/old_stamper.woff') format('woff');
+    }
+
+    @font-face {
+      font-family: 'sportrop regular';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Sportrop Regular'), local('Sportrop-Regular'),
+        url("./fonts/sportrop.regular.ttf") format("woff"),
+        url("./fonts/sportrop.regular.ttf") format("opentype"),
+        url("./fonts/sportrop.regular.ttf") format("truetype");
+    }
+
+    @font-face {
+      font-family: capture it;
+      font-style: normal;
+      font-weight: 400;
+      src: local('Capture it'), local('Captureit-Regular'),
+        url(https://allfont.ru/cache/fonts/capture-it_36d8e4bafcd0d3bd809b9d12e819982e.woff) format('woff'),
+        url(https://allfont.ru/cache/fonts/capture-it_36d8e4bafcd0d3bd809b9d12e819982e.ttf) format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Armalite Rifle';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Armalite Rifle'), local('ArmaliteRifle-Regular'),
+        url(https://allfont.ru/cache/fonts/armalite-rifle_8b8d0c2e30a8ddf3d87d1cff3852f649.woff) format('woff'),
+        url(https://allfont.ru/cache/fonts/armalite-rifle_8b8d0c2e30a8ddf3d87d1cff3852f649.ttf) format('truetype');
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    var startF = 0;
+    /*----------------------------------------------------------------------
+    Prevent Reload page when workout
+    ----------------------------------------------------------------------*/
+    window.onbeforeunload = function () {
+      if (startF != 0) {
+        return "Do you want to reload page?";
       };
+    };
 
-      /*----------------------------------------------------------------------
-      Prevent Lock Screen on mobile
-      - first event: click
-      - second event: hide tab
-      ----------------------------------------------------------------------*/
-      var checkScreen = 0;
-      document.addEventListener('click', async () => {
-        if (('wakeLock' in navigator) && (checkScreen == 0)) {
-            checkScreen = 1;
-            let screenLock = await navigator.wakeLock.request('screen');
-        };
-      });
+    /*----------------------------------------------------------------------
+    Prevent Lock Screen on mobile
+    - first event: click
+    - second event: hide tab
+    ----------------------------------------------------------------------*/
+    var checkScreen = 0;
+    document.addEventListener('click', async () => {
+      if (('wakeLock' in navigator) && (checkScreen == 0)) {
+        checkScreen = 1;
+        let screenLock = await navigator.wakeLock.request('screen');
+      };
+    });
 
-      document.addEventListener('visibilitychange', async () => {
-        if ('wakeLock' in navigator) {
-            let screenLock = await navigator.wakeLock.request('screen');
-        };
-      });
-    </script>
-    <script src="./cardio/build.js"></script>
-  </body>
+    document.addEventListener('visibilitychange', async () => {
+      if ('wakeLock' in navigator) {
+        let screenLock = await navigator.wakeLock.request('screen');
+      };
+    });
+  </script>
+  <script src="./cardio/build.js"></script>
+  <iframe src="./background.html" style="display:none;"></iframe>
+</body>
+
 </html>
