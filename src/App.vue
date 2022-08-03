@@ -44,6 +44,7 @@ export default {
 
   methods: {
     activeStart(data){
+      startF = data.flag;
       this.flagStart = data.flag;
       this.warmup = data.warmup;
       this.hiit = data.hiit;
