@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    
+
     <img width="70%" src="cardio/banner_prime.png" class="img-responsive" style="margin: 0 auto;">
 
     <!-- <h1>{{ msg }}</h1> -->
 
-    <input-lvl 
+    <input-lvl
     v-if="flagStart === 0"
     v-on:start="activeStart"
     />
@@ -37,11 +37,11 @@ export default {
     }
   },
 
-  components: { 
+  components: {
     inputLvl,
     timerCardio
   },
-  
+
   methods: {
     activeStart(data){
       this.flagStart = data.flag;
@@ -49,8 +49,36 @@ export default {
       this.hiit = data.hiit;
     }
   }
-  
+
 }
+
+/*----------------------------------------------------------------------
+Prevent Reload page when workout
+----------------------------------------------------------------------*/
+window.onbeforeunload = function() {
+  if (vm.time > 0){
+      return "Do you want to reload page?";
+  };
+};
+
+/*----------------------------------------------------------------------
+Prevent Lock Screen on mobile
+- first event: click
+- second event: hide tab
+----------------------------------------------------------------------*/
+var checkScreen = 0;
+document.addEventListener('click', async () => {
+  if (('wakeLock' in navigator) && (checkScreen == 0)) {
+      checkScreen = 1;
+      let screenLock = await navigator.wakeLock.request('screen');
+  };
+});
+
+document.addEventListener('visibilitychange', async () => {
+  if ('wakeLock' in navigator) {
+      let screenLock = await navigator.wakeLock.request('screen');
+  };
+});
 </script>
 
 <style>
@@ -58,7 +86,7 @@ export default {
     font-family: 'Destroy';
     font-style: normal;
     font-weight: 400;
-    src: local('Destroy'), 
+    src: local('Destroy'),
         url('https://fonts.cdnfonts.com/s/111/DESTROY_.woff') format('woff');
 }
 
@@ -66,7 +94,7 @@ export default {
     font-family: 'Old Stamper';
     font-style: normal;
     font-weight: 400;
-    src: local('Old Stamper'), 
+    src: local('Old Stamper'),
         url('https://fonts.cdnfonts.com/s/331/old_stamper.woff') format('woff');
 }
 
