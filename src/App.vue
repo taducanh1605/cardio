@@ -1,20 +1,27 @@
 <template>
   <div id="app">
-
-    <img width="99%" src="cardio/banner_prime.png" class="img-responsive" style="margin: 0 auto;">
-
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <img width="99%" src="cardio/banner_prime.png" class="img-responsive" style="margin: 0 auto;">
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
     <!-- <h1>{{ msg }}</h1> -->
 
-    <input-lvl
-    v-if="flagStart === 0"
-    v-on:start="activeStart"
-    />
+    <div class="row">
+      <div class="col-sm-12">
 
-    <timer-cardio
-    v-if="flagStart === 1"
-    v-bind:warmupFlag="warmup"
-    v-bind:hiit="hiit"
-    v-bind:flagStartProp="flagStart"/>
+        <input-lvl v-if="flagStart === 0" v-on:start="activeStart"/>
+
+        <timer-cardio
+        v-if="flagStart === 1"
+        v-bind:warmupFlag="warmup"
+        v-bind:hiit="hiit"
+        v-bind:flagStartProp="flagStart"/>
+
+      </div>
+    </div>
 
   </div>
 </template>
