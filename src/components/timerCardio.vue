@@ -31,7 +31,7 @@
           <img v-if="flagStart === 3" src="cardio/finish.png" class="img-responsive button-img">
         </div>
       </div>
-    
+
     </div>
 </template>
 
@@ -46,8 +46,12 @@ function padding_zero(number) {
 }
 
 function ring(nameRing){
-    var myRing = new Audio('cardio/'+nameRing+'.wav');
-    myRing.play();
+    // var myRing = new Audio('cardio/'+nameRing+'.wav');
+    // myRing.play();
+    var myRing = new Audio();
+    myRing.autoplay = true;
+    myRing.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
+    myRing.src = 'cardio/'+nameRing+'.wav';
 }
 
 export default {
@@ -100,7 +104,7 @@ export default {
 
       row3_switch: "row3_ready",
       row4_switch: "row4_ready"
-      
+
     }
   },
 
@@ -171,7 +175,7 @@ export default {
         return ("WARM-UP ROUND: " + this.order + "/2");
       }
     },
-    
+
     row_content: function() {
       if (this.flagPause > 0){
         this.row3_switch = "row3_ready";
@@ -234,7 +238,7 @@ export default {
         else {
           if (this.flagPause > 0) {
             this.timer = 3;
-            this.flagPause = 0; 
+            this.flagPause = 0;
           }
           else if (this.flagCardio > 0) {
             ring('breaktime');
@@ -328,8 +332,8 @@ export default {
 </script>
 
 <style>
-/* 
------------------------------------Row 1 
+/*
+-----------------------------------Row 1
 */
 .row1 {
     font-family: "Armalite Rifle";
@@ -340,22 +344,22 @@ export default {
     margin: 15px auto;
 }
 
-/* 
------------------------------------Row 2 
+/*
+-----------------------------------Row 2
 */
 #frame_row2 {
   width: 100%;
 	text-align:center;
   align-items: center;
   vertical-align: middle;
-    
-  display: -webkit-flex;    
+
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-        
-  -webkit-align-items: center;    
+
+  -webkit-align-items: center;
   -ms-flex-align: center;
-  align-items: center; 
+  align-items: center;
 }
 #row2 {
   width:60%;
@@ -407,8 +411,8 @@ export default {
 	color: #fff;
 }
 
-/* 
------------------------------------Row 3 
+/*
+-----------------------------------Row 3
 */
 .row3 {
     margin: 0.5rem auto;
@@ -435,8 +439,8 @@ export default {
   text-shadow: 0 0 20px rgb(230, 10, 47),  0 0 20px rgba(10, 230, 201, 0);
 }
 
-/* 
------------------------------------Row 4 
+/*
+-----------------------------------Row 4
 */
 .row4 {
   margin: 2rem auto;
