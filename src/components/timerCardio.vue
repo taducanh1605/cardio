@@ -50,8 +50,7 @@ function ring(nameRing) {
     ring.addEventListener('click', function () {
         var myRing = new Audio();
         myRing.autoplay = true;
-        myRing.src = "data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
-        myRing.src = './sound/' + nameRing;
+    myRing.src = './cardio/' + nameRing + '.wav';
     });
     ring.click();
 };
@@ -350,34 +349,26 @@ export default {
 -----------------------------------Row 2
 */
 #frame_row2 {
-  width: 100%;
+  width: min(760px, 100%);
 	text-align:center;
+  margin: 0 auto;
   align-items: center;
   vertical-align: middle;
-
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-
-  -webkit-align-items: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 #row2 {
   width:60%;
-	float:left;
 }
 #button-back{
   padding: 5px 0;
-  width: 24%;
+  width: 20%;
   text-align: right;
-  float: left;
 }
 #button-next{
   padding: 5px 0;
   width: 20%;
   text-align: left;
-  float: right;
 }
 .row2 {
     margin: 2rem auto;
@@ -463,6 +454,45 @@ export default {
 .row4_break {
   color: #109fff;
   text-shadow: 0 0 20px rgb(10, 223, 230),  0 0 20px rgba(10, 230, 201, 0);
+}
+
+#frame_button {
+  width: min(760px, 100%);
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 700px) {
+  .row1 {
+    margin: 8px auto;
+    font-size: clamp(16px, 4.9vw, 24px);
+  }
+
+  .row2 {
+    margin: 12px auto;
+    font-size: clamp(18px, 5.2vw, 24px);
+  }
+
+  .row3 {
+    font-size: clamp(24px, 8.2vw, 34px);
+  }
+
+  .row4 {
+    margin: 14px auto;
+    font-size: clamp(22px, 7vw, 32px);
+  }
+
+  #button-back,
+  #button-next {
+    width: 22%;
+  }
+
+  #row2 {
+    width: 56%;
+  }
+
+  .button a {
+    font-size: clamp(26px, 8vw, 36px);
+  }
 }
 
 </style>

@@ -68,10 +68,13 @@ export default {
 
 <style>
 .selectLvl {
-    background: #454646;
+  width: min(300px, 95%);
+  background: #454646;
     color: #fff;
     border-radius: 18px;
-    padding: 0px 5px 0px 5px;
+  border: 1px solid #747474;
+  padding: 6px 10px;
+  font-size: 16px;
 }
 
 </style>
