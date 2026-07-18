@@ -64,23 +64,122 @@
     };
 
     /*----------------------------------------------------------------------
-    Prevent Lock Screen on mobile
-    - first event: click
-    - second event: hide tab
+    Keep screen awake + keep media unlocked on Android/iPhone
+    - Re-request wake lock when tab becomes visible again
+    - Only hold wake lock while workout is active
+    - Prime audio from a real user gesture to avoid iOS audio blocking
     ----------------------------------------------------------------------*/
-    var checkScreen = 0;
-    document.addEventListener('click', async () => {
-      if (('wakeLock' in navigator) && (checkScreen == 0)) {
-        checkScreen = 1;
-        let screenLock = await navigator.wakeLock.request('screen');
-      };
-    });
+    (function () {
+      var wakeLockSentinel = null;
+      var wakeLockRetryTimer = null;
+      var wakeLockRetryDelay = 800;
+      var mediaPrimed = false;
 
-    document.addEventListener('visibilitychange', async () => {
-      if ('wakeLock' in navigator) {
-        let screenLock = await navigator.wakeLock.request('screen');
-      };
-    });
+      function isWorkoutActive() {
+        return window.startF !== 0;
+      }
+
+      function shouldHoldWakeLock() {
+        return isWorkoutActive() && document.visibilityState === 'visible';
+      }
+
+      function clearWakeLockRetry() {
+        if (wakeLockRetryTimer) {
+          clearTimeout(wakeLockRetryTimer);
+          wakeLockRetryTimer = null;
+        }
+      }
+
+      function scheduleWakeLockRetry() {
+        if (wakeLockRetryTimer || !shouldHoldWakeLock()) {
+          return;
+        }
+        wakeLockRetryTimer = setTimeout(function () {
+          wakeLockRetryTimer = null;
+          requestWakeLock();
+        }, wakeLockRetryDelay);
+      }
+
+      function attachReleaseHandler(lock) {
+        lock.addEventListener('release', function () {
+          wakeLockSentinel = null;
+          if (shouldHoldWakeLock()) {
+            scheduleWakeLockRetry();
+          }
+        });
+      }
+
+      async function requestWakeLock() {
+        if (!('wakeLock' in navigator) || wakeLockSentinel || !shouldHoldWakeLock()) {
+          return;
+        }
+
+        try {
+          wakeLockSentinel = await navigator.wakeLock.request('screen');
+          attachReleaseHandler(wakeLockSentinel);
+          wakeLockRetryDelay = 800;
+        } catch (error) {
+          wakeLockSentinel = null;
+          wakeLockRetryDelay = Math.min(wakeLockRetryDelay * 2, 10000);
+          scheduleWakeLockRetry();
+        }
+      }
+
+      function releaseWakeLock() {
+        clearWakeLockRetry();
+        if (!wakeLockSentinel) {
+          return;
+        }
+        var lockRef = wakeLockSentinel;
+        wakeLockSentinel = null;
+        lockRef.release().catch(function () {});
+      }
+
+      function syncWakeLock() {
+        if (shouldHoldWakeLock()) {
+          requestWakeLock();
+        } else {
+          releaseWakeLock();
+        }
+      }
+
+      function primeMedia() {
+        if (mediaPrimed) {
+          return;
+        }
+        mediaPrimed = true;
+
+        try {
+          var unlockAudio = new Audio('./cardio/start.wav');
+          unlockAudio.preload = 'auto';
+          unlockAudio.volume = 0.001;
+          var playPromise = unlockAudio.play();
+          if (playPromise && typeof playPromise.then === 'function') {
+            playPromise.then(function () {
+              unlockAudio.pause();
+              unlockAudio.currentTime = 0;
+            }).catch(function () {});
+          }
+        } catch (error) {}
+      }
+
+      function handleFirstGesture() {
+        primeMedia();
+        syncWakeLock();
+      }
+
+      window.__cardioPrimeAudio = primeMedia;
+      window.__cardioSyncWakeLock = syncWakeLock;
+
+      document.addEventListener('click', handleFirstGesture, { passive: true });
+      document.addEventListener('touchend', handleFirstGesture, { passive: true });
+      document.addEventListener('visibilitychange', syncWakeLock);
+      window.addEventListener('focus', syncWakeLock);
+      window.addEventListener('pageshow', syncWakeLock);
+
+      // Fallback periodic sync for browsers that silently release lock.
+      setInterval(syncWakeLock, 15000);
+    })();
   </script>
   <script src="./cardio/build.js"></script>
   <iframe src="./background.html" style="display:none;"></iframe>

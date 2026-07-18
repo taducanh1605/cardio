@@ -139,11 +139,17 @@ export default {
       if (queryConfig.autoStart) {
         this.flagStart = 1;
         window.startF = 1;
+        if (window.__cardioSyncWakeLock) {
+          window.__cardioSyncWakeLock();
+        }
       }
     },
 
     activeStart(data){
       window.startF = data.flag;
+      if (window.__cardioSyncWakeLock) {
+        window.__cardioSyncWakeLock();
+      }
       this.flagStart = data.flag;
       this.warmup = data.warmup;
       this.hiit = this.normalizeHiit(data.hiit);
@@ -170,7 +176,7 @@ html, body {
 
 body {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 8px;
   background: radial-gradient(ellipse at center,  #242424  0%, #0c0c0e 70%);
@@ -187,6 +193,7 @@ body.embedded-mode {
 .app-shell {
   margin: 0 auto;
   min-height: calc(100vh - 16px);
+  padding-top: clamp(10px, 2.8vh, 28px);
   display: flex;
   flex-direction: column;
 }
@@ -195,6 +202,7 @@ body.embedded-mode {
   width: 100%;
   max-width: none;
   min-height: 100%;
+  padding-top: 0;
 }
 
 .hero-row {
@@ -214,7 +222,7 @@ body.embedded-mode {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -259,6 +267,7 @@ pre {
 
   .app-shell {
     min-height: calc(100vh - 12px);
+    padding-top: 8px;
   }
 
   .app-shell.is-embedded {

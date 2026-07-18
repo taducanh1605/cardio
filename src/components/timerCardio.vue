@@ -45,15 +45,38 @@ function padding_zero(number) {
   }
 }
 
+var sharedRingAudio = null;
+
+function primeAudioAndWakeLock() {
+  if (window.__cardioPrimeAudio) {
+    window.__cardioPrimeAudio();
+  }
+  if (window.__cardioSyncWakeLock) {
+    window.__cardioSyncWakeLock();
+  }
+}
+
+function getRingAudio() {
+  if (!sharedRingAudio) {
+    sharedRingAudio = new Audio();
+    sharedRingAudio.preload = 'auto';
+  }
+  return sharedRingAudio;
+}
+
 function ring(nameRing) {
-    var ring = document.createElement("a");
-    ring.addEventListener('click', function () {
-        var myRing = new Audio();
-        myRing.autoplay = true;
-    myRing.src = './cardio/' + nameRing + '.wav';
-    });
-    ring.click();
-};
+  try {
+    var ringPlayer = getRingAudio();
+    ringPlayer.pause();
+    ringPlayer.currentTime = 0;
+    ringPlayer.src = './cardio/' + nameRing + '.wav';
+
+    var playPromise = ringPlayer.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () {});
+    }
+  } catch (error) {}
+}
 
 export default {
   name: 'timer-cardio',
@@ -278,6 +301,7 @@ export default {
   },
 
   mounted: function(){
+    primeAudioAndWakeLock();
     setInterval(this.updateTime, 1000);
     this.updateTime();
     if (this.flagStart == 0){
@@ -293,6 +317,7 @@ export default {
     },
 
     handleStartButton: function() {
+      primeAudioAndWakeLock();
       if (this.flagStart === 1) {
         this.flagStart = 2;
         this.flagPause = 1;
