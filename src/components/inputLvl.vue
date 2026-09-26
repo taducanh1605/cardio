@@ -3,8 +3,8 @@
       <!-- <p>Set cardio-time and break-time and how many round you want to do.</p> -->
 
 
-      <div class="select-line">
-        <div class="select-column">
+      <div class="select-line" v-bind:class="{ 'select-line-embedded': hideLevelSelector }">
+        <div class="select-column" v-if="!hideLevelSelector">
           <select-lvl v-on:selectHandle="handleSelectLvl"/>
         </div>
         <div class="select-column checkbox-col">
@@ -112,6 +112,10 @@ export default {
     initialWarmup: {
       type: Boolean,
       default: true
+    },
+    hideLevelSelector: {
+      type: Boolean,
+      default: false
     },
     initialHiit: {
       type: Object,
@@ -257,6 +261,12 @@ export default {
 .checkbox-col {
   text-align: left;
   padding-left: 6px;
+}
+
+.select-line-embedded .checkbox-col {
+  flex: 0 1 auto;
+  text-align: center;
+  padding-left: 0;
 }
 
 .select-line div {

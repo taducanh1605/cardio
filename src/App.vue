@@ -10,6 +10,7 @@
         v-if="flagStart === 0"
         v-bind:initialHiit="hiit"
         v-bind:initialWarmup="warmup"
+        v-bind:hideLevelSelector="embedMode"
         v-on:start="activeStart"/>
 
         <timer-cardio
